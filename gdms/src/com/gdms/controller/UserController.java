@@ -106,17 +106,17 @@ public class UserController {
 			HttpServletRequest request, Model model) {
 		String method = request.getMethod();
 		if ("GET".equals(method)) {
-			return "register";
+			return "teacherregister";
 		} else {
 			if (user == null) {
 				model.addAttribute("msg", "user为空");
-				return "register";
+				return "teacherregister";
 			} else if (user.getIntroduction() == null
 					|| user.getMajor() == null || user.getPassword() == null
 					|| user.getName() == null || user.getAmount() == null
 					|| user.getJobtitle() == null) {
 				model.addAttribute("msg", "数据不能为空");
-				return "register";
+				return "teacherregister";
 			} else {
 				if (userService.register(user, validateCode)) {
 					model.addAttribute("user", user);
@@ -124,7 +124,7 @@ public class UserController {
 					return "redirect:/login";
 				} else {
 					model.addAttribute("msg", "学号或密码错误");
-					return "register";
+					return "teacherregister";
 				}
 			}
 		}

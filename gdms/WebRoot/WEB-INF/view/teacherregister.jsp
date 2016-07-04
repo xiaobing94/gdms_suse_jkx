@@ -73,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="docs-tip">
 				<form action="registerAction" method="post" class="form form-horizontal responsive" id="regist-form">
 					<legend><a href="student_register">学生注册</a> 教师注册</legend>
+					${ msg }
 					<div class="row cl">
 						<label class="form-label col-3">学号：</label>
 						<div class="formControls col-5">

@@ -73,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<form action="" method="post" class="form form-horizontal responsive" id="regist-form">
 					<legend>学生注册 <a href="teacher_register">教师注册</a></legend>
 					<div class="row cl">
+					    ${ msg }
 						<label class="form-label col-3">学号：</label>
 						<div class="formControls col-5">
 							<input type="text" class="input-text" autocomplete="off" placeholder="学号" name="workId" id="username" datatype="n" nullmsg="学号不能为空！">

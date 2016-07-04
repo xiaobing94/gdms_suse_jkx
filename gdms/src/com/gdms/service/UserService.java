@@ -58,6 +58,19 @@ public class UserService {
 			}
 		}
 	}
+	public boolean teacherRegister(User user, String validateCode) {
+		User user_tmp = userDAO.selectByWorkId(user.getWorkId());
+		if (user_tmp != null) {
+			return false;
+		} else {
+			if (ValidateUser.ValidateTeacher(user, validateCode)) {
+				userDAO.insertSelective(user);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 
 	public List<User> getTeacherByMajor(String major) {
 		List<User> teacherList = userDAO.selectTeacherByMajor(major);
