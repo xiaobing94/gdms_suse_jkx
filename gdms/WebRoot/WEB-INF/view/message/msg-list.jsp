@@ -10,6 +10,7 @@
           <div class="tabBar cl">
           <span role="tab">未读消息</span>
           <span role="tab">已读消息 </span>
+          <span role="tab">已发消息 </span>
           </div>
           <div class="tabCon bk_gray pd-10" role="tabpanel" style="display: block;">
           	<ul>
@@ -24,6 +25,16 @@
           <div class="tabCon bk_gray pd-10" role="tabpanel" style="display: none;">
           		<ul>
           		<c:forEach items="${ readmessageList }" var="msg">
+          		<li>
+          			<a href="message/detail?msg_id=${msg.id}"><c:out value="${msg.note}"></c:out></a>
+          			<span style="float:right"><c:out value="${msg.dateline}"></c:out></span>
+          		</li>
+          		</c:forEach>
+          	</ul>
+          </div>
+          <div class="tabCon bk_gray pd-10" role="tabpanel" style="display: none;">
+          		<ul>
+          		<c:forEach items="${ sendMessageList }" var="msg">
           		<li>
           			<a href="message/detail?msg_id=${msg.id}"><c:out value="${msg.note}"></c:out></a>
           			<span style="float:right"><c:out value="${msg.dateline}"></c:out></span>

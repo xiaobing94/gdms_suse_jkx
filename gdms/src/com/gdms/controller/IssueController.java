@@ -102,7 +102,7 @@ public class IssueController extends BaseController{
 		User student = (User) session.getAttribute("user");
 		User teacher = tutorStuService.getTeacherByStudent(student.getId());
 		if(teacher==null){
-			model.addAttribute("msg", "你还没有选择导师，或者导师还没有选择你");
+			model.addAttribute("msg", "你当前阶段还没有确定唯一的导师，请查看你的进度状态");
 			return "notice-msg";
 		}
 		List<Issue> issueList = issueService.getIssueListByTeacher(teacher.getId());

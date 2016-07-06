@@ -84,6 +84,7 @@
 					</c:if>
 					<c:if test="${ user.isStudent() }">
 					<li><a onclick="layer_show('导师资料','issue/getMyTutor',400,400);">导师资料</a></li>
+					<li><a onclick="layer_show('当前进度','choise/getMyProgress',400,400);">当前进度</a></li>
 					<li><a _href="degree/getmydegreelist" href="javascript:void(0)">我的课题阶段列表</a></li>
 					<li><a onclick="layer_show('上传阶段成果','degree/upload_degree',400,400);">上传阶段成果</a></li>
 					</c:if>
@@ -149,6 +150,9 @@
 			<dd>
 				<ul>
 					<li><a onclick="layer_show('消息列表','message/list',500,400);">消息列表</a></li>
+					<c:if test="${ teacher != null }">
+					<li><a onclick="layer_show('发送消息给${teacher.name}','message/send?recvId=${teacher.id}',300,300);">导师通讯</a></li>
+					</c:if>
 				</ul>
 			</dd>
 		</dl>

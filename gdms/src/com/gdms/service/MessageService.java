@@ -52,6 +52,12 @@ public class MessageService {
 		 */
 		return messageDAO.selectReadByUserId(user.getId());
 	}
+	public List<Message> getSendMessageListByUser(User user){
+		/*
+		 * 获取用户的已读消息列表
+		 */
+		return messageDAO.selectSendByUserId(user.getId());
+	}
 	public Message getMessageContent(int msgId)
 	{
 		/**

@@ -73,8 +73,10 @@ public class MessageController {
 		User user = (User) session.getAttribute("user");
 		List<Message> readmessageList = messageService.getReadMessageListByUser(user);
 		List<Message> unreadmessageList = messageService.getUnreadMessageListByUser(user);
+		List<Message> sendMessageList = messageService.getSendMessageListByUser(user);
 		model.addAttribute("unreadmessageList", unreadmessageList);
 		model.addAttribute("readmessageList", readmessageList);
+		model.addAttribute("sendMessageList", sendMessageList);
 		return "message/msg-list";
 	}
 

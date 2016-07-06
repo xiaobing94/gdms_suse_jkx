@@ -247,7 +247,7 @@ public class UserController {
 			model.addAttribute("msg", "成功");
 		}
 		else{
-			model.addAttribute("msg", "文件错误");
+			model.addAttribute("msg", "文件格式或者内容错误");
 		}
 		return "notice-msg";
 		// }

@@ -19,6 +19,8 @@ public interface MessageMapper {
     
     List<Message> selectReadByUserId(Integer userId);
     
+    List<Message> selectSendByUserId(Integer userId);
+    
     List<Message> selectByUsers(Integer userId1, Integer userId2);
 
     int updateByPrimaryKeySelective(Message record);

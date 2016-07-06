@@ -41,6 +41,14 @@
     from message
     where recv_id = #{userId,jdbcType=INTEGER} ORDER BY dateline desc
   </select>
+  <select id="selectSendByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where from_id = #{userId,jdbcType=INTEGER} ORDER BY dateline desc
+  </select>
   <select id="selectUnreadByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
