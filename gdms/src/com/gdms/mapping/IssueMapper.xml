@@ -25,7 +25,7 @@
   <select id="selectByStudentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     issue.id, issue.subject, issue.introduction, issue.user_id
-    from user, issue where `user`.issue_id = issue.id
+    from user, issue where `user`.issue_id = issue.id and `user`.id = #{studentId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from issue

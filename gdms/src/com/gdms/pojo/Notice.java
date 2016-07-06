@@ -15,7 +15,17 @@ public class Notice {
 
     private String text;
     
-    public static final int COLLEGE = 3;
+    private User authorUser;
+    
+    public User getAuthorUser() {
+		return authorUser;
+	}
+
+	public void setAuthorUser(User authorUser) {
+		this.authorUser = authorUser;
+	}
+
+	public static final int COLLEGE = 3;
     
     public static final int TEACHER = 1;
     

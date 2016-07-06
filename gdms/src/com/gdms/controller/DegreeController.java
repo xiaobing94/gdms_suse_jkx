@@ -16,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gdms.pojo.Comment;
 import com.gdms.pojo.Degree;
+import com.gdms.pojo.Issue;
 import com.gdms.pojo.User;
 import com.gdms.service.DegreeService;
+import com.gdms.service.IssueService;
 import com.gdms.service.TutorStuService;
 import com.gdms.service.UserService;
 
@@ -30,6 +32,17 @@ public class DegreeController {
 	private UserService userService;
 	@Resource
 	private TutorStuService tutorStuService;
+	@Resource
+	private IssueService issueService;
+
+	public IssueService getIssueService() {
+		return issueService;
+	}
+
+	public void setIssueService(IssueService issueService) {
+		this.issueService = issueService;
+	}
+
 	public TutorStuService getTutorStuService() {
 		return tutorStuService;
 	}
@@ -65,6 +78,8 @@ public class DegreeController {
 		} else {
 			model.addAttribute("msg", "没有权限");
 		}
+		Issue issue = issueService.getStudentIssue(user);
+		model.addAttribute("issue", issue);
 		return "teacher/student-degree-list";
 	}
 

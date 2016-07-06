@@ -1,5 +1,7 @@
 package com.gdms.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.gdms.dao.NoticeMapper;
 import com.gdms.dao.TutorStuMapper;
 import com.gdms.dao.UserMapper;
+import com.gdms.pojo.Message;
 import com.gdms.pojo.Notice;
 import com.gdms.pojo.TutorStu;
 import com.gdms.pojo.User;
@@ -72,21 +75,102 @@ public class NoticeService {
 	}
 
 	public List<Notice> getCollegeNoticeList() {
-		return noticeDAO.selectCollage();
+		List<Notice> noticeList = noticeDAO.selectCollage();
+//		if(noticeList==null){
+//			return null;
+//		}
+//		Collections.sort(noticeList, new Comparator<Notice>() {
+//
+//			@Override
+//			public int compare(Notice notice1, Notice notice2) {
+//				// TODO Auto-generated method stub
+//				return notice2.getDateline().compareTo(notice1.getDateline());
+//			}
+//        });
+		return noticeList;
 	}
-
+	
+	public void deleteById(int id) {
+		noticeDAO.deleteByPrimaryKey(id);
+	}
+	
+	public void deleteByArr(int[] noticeIdArr){
+		/**
+		 * 根据文章id数组删除文章
+		 */
+		for(int id: noticeIdArr){
+			deleteById(id);
+		}
+	}
+	
 	public List<Notice> getMajorNoticeList(String major) {
-		return noticeDAO.selectByMajor(major);
+		List<Notice> noticeList = noticeDAO.selectByMajor(major);
+//		if(noticeList==null){
+//			return null;
+//		}
+//		Collections.sort(noticeList, new Comparator<Notice>() {
+//
+//			@Override
+//			public int compare(Notice notice1, Notice notice2) {
+//				// TODO Auto-generated method stub
+//				return notice2.getDateline().compareTo(notice1.getDateline());
+//			}
+//        });
+		return noticeList;
 	}
 
 	public List<Notice> getTutorNoticeList(User student) {
 		TutorStu tutorStu = tutorStuDAO.getTeacherByStudentId(student.getId());
 		if (tutorStu != null) {
+			List<Notice> noticeList = noticeDAO.selectByTeacherId(tutorStu.getTeacherId());
 			//User teacher = userDAO.selectByPrimaryKey(tutorStu.getTeacherId());
-			return noticeDAO.selectByTeacherId(tutorStu.getTeacherId());
+//			Collections.sort(noticeList, new Comparator<Notice>() {
+//
+//				@Override
+//				public int compare(Notice notice1, Notice notice2) {
+//					// TODO Auto-generated method stub
+//					return notice2.getDateline().compareTo(notice1.getDateline());
+//				}
+//	        });
+			return noticeList;
 		} else {
 			return null;
 		}
 	}
-
+	public List<Notice> getAllNotice() {
+		List<Notice> noticeList = noticeDAO.selectAll();
+		for(Notice notice:noticeList){
+			Integer authorId = notice.getAuthor();
+			User authorUser = null;
+			if(authorId!=null){
+				authorUser= userDAO.selectByPrimaryKey(authorId);
+			}
+			notice.setAuthorUser(authorUser);
+		}
+		return noticeList;
+	}
+	public List<Notice> getAllNoticeByMajor(String major) {
+		List<Notice> noticeList = noticeDAO.selectAllByMajor(major);
+		for(Notice notice:noticeList){
+			Integer authorId = notice.getAuthor();
+			User authorUser = null;
+			if(authorId!=null){
+				authorUser= userDAO.selectByPrimaryKey(authorId);
+			}
+			notice.setAuthorUser(authorUser);
+		}
+		return noticeList;
+	}
+	public List<Notice> getNoticeListWithAuthorUserByTeacherId(int teacher_id){
+		List<Notice> noticeList = getNoticeListByTeacherId(teacher_id);
+		for(Notice notice:noticeList){
+			Integer authorId = notice.getAuthor();
+			User authorUser = null;
+			if(authorId!=null){
+				authorUser= userDAO.selectByPrimaryKey(authorId);
+			}
+			notice.setAuthorUser(authorUser);
+		}
+		return noticeList;
+	}
 }

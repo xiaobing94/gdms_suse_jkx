@@ -31,7 +31,7 @@
     ,
     <include refid="Blob_Column_List" />
     from message
-    where (recv_id = #{0,jdbcType=INTEGER} and from_id = #{1,jdbcType=INTEGER}) or (recv_id = #{1,jdbcType=INTEGER} and from_id = #{0,jdbcType=INTEGER})
+    where (recv_id = #{0,jdbcType=INTEGER} and from_id = #{1,jdbcType=INTEGER}) or (recv_id = #{1,jdbcType=INTEGER} and from_id = #{0,jdbcType=INTEGER}) ORDER BY dateline desc
   </select>
   <select id="selectByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -39,7 +39,7 @@
     ,
     <include refid="Blob_Column_List" />
     from message
-    where recv_id = #{userId,jdbcType=INTEGER}
+    where recv_id = #{userId,jdbcType=INTEGER} ORDER BY dateline desc
   </select>
   <select id="selectUnreadByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -47,7 +47,7 @@
     ,
     <include refid="Blob_Column_List" />
     from message
-    where recv_id = #{userId,jdbcType=INTEGER} and status = 0
+    where recv_id = #{userId,jdbcType=INTEGER} and status = 0 ORDER BY dateline desc
   </select>
   <select id="selectReadByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -55,7 +55,7 @@
     ,
     <include refid="Blob_Column_List" />
     from message
-    where recv_id = #{userId,jdbcType=INTEGER} and status = 1
+    where recv_id = #{userId,jdbcType=INTEGER} and status = 1 ORDER BY dateline desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from message

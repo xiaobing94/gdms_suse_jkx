@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.gdms.dao.UserMapper;
 import com.gdms.pojo.User;
+import com.gdms.tools.Md5Util;
 import com.gdms.tools.PropertiesLog4j;
 import com.gdms.tools.UtilXls;
 import com.gdms.tools.ValidateUser;
@@ -31,6 +32,7 @@ public class UserService {
 	public boolean login(HttpSession session, String workId, String password) {
 		// TODO Auto-generated method stub
 		// String passwdMd5 = Md5Util.Convert2Md5(password);
+		password = Md5Util.Convert2Md5(password);
 		User user = userDAO.selectByWorkIdandPassword(workId, password);
 		if (user != null) {
 			session.setAttribute("user", user);
@@ -51,6 +53,7 @@ public class UserService {
 			return false;
 		} else {
 			if (ValidateUser.Validate(user, validateCode)) {
+				user.setPassword(Md5Util.Convert2Md5(user.getPassword()));
 				userDAO.insertSelective(user);
 				return true;
 			} else {
@@ -58,12 +61,14 @@ public class UserService {
 			}
 		}
 	}
+
 	public boolean teacherRegister(User user, String validateCode) {
 		User user_tmp = userDAO.selectByWorkId(user.getWorkId());
 		if (user_tmp != null) {
 			return false;
 		} else {
 			if (ValidateUser.ValidateTeacher(user, validateCode)) {
+				user.setPassword(Md5Util.Convert2Md5(user.getPassword()));
 				userDAO.insertSelective(user);
 				return true;
 			} else {
@@ -81,13 +86,33 @@ public class UserService {
 		int grade = PropertiesLog4j.getGrade();
 		return userDAO.selectChoiseMeStudent(teacher.getId(), grade);
 	}
-	
+
 	public List<User> getStudentByTeacher(User teacher) {
 		int grade = PropertiesLog4j.getGrade();
 		return userDAO.selectStudentByTeacherId(teacher.getId(), grade);
 	}
-	
+
 	public void updateUserById(User user) {
+		this.userDAO.updateByPrimaryKeySelective(user);
+	}
+
+	public boolean verifyUserPassword(User user, String password) {
+		password = Md5Util.Convert2Md5(password);
+		User userTmp = userDAO.selectByWorkIdandPassword(user.getWorkId(),
+				password);
+		if (userTmp != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void modifyPassword(User user, String oldPassword, String password) {
+		/**
+		 * 修改密码
+		 */
+
+		user.setPassword(Md5Util.Convert2Md5(password));
 		this.userDAO.updateByPrimaryKeySelective(user);
 	}
 
@@ -200,18 +225,31 @@ public class UserService {
 		return userArr;
 	}
 
-	public void createUserByArr(User[] userArr) {
+	public boolean createUserByArr(User[] userArr) {
 		/**
 		 * 把数组里面的内容保存到数据库
 		 */
-		for (int i = 0; i < userArr.length; i++) {
-			if (userDAO.selectByWorkId(userArr[i].getWorkId()) == null) {
-				userDAO.insertSelective(userArr[i]);
+		if (userArr == null) {
+			return false;
+		} else {
+			try {
+				for (int i = 0; i < userArr.length; i++) {
+					String workId = userArr[i].getWorkId();
+					if (userDAO.selectByWorkId(workId) == null) {
+						userArr[i].setPassword(Md5Util.Convert2Md5(userArr[i]
+								.getPassword()));
+						userDAO.insertSelective(userArr[i]);
+					}
+				}
+				return true;
+			} catch (NullPointerException e) {
+				return false;
 			}
+
 		}
 	}
 
-	public void importTeacherXls(File xlsFile) {
+	public boolean importTeacherXls(File xlsFile) {
 		/**
 		 * 导入xls导师内容到数据库
 		 */
@@ -225,23 +263,16 @@ public class UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		createUserByArr(userArr);
+		return createUserByArr(userArr);
 	}
 
-	public void importStudentXls(File xlsFile) {
+	public boolean importStudentXls(File xlsFile) throws BiffException,
+			IOException {
 		/**
 		 * 导入xls学生内容到数据库
 		 */
 		User[] userArr = null;
-		try {
-			userArr = getStudentUserArrByXls(xlsFile);
-		} catch (BiffException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		createUserByArr(userArr);
+		userArr = getStudentUserArrByXls(xlsFile);
+		return createUserByArr(userArr);
 	}
 }

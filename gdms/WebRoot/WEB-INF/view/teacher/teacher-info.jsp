@@ -12,9 +12,9 @@
 <div class="cl pd-20" style=" background-color:#5bacb6">
   <img class="avatar size-XL l" src="res/images/user.png">
   <dl style="margin-left:80px; color:#fff">
-    <dt><span class="f-18">${teacher.name}</span> <span class="pl-10 f-12">职称：${teacher.jobtitle} <a onclick="layer_show('发送消息给${teacher.name}','message/send?recvId=${teacher.id}',300,300);">发送消息</a>
+    <dt><span class="f-18"><c:out value="${teacher.name}"></c:out></span> <span class="pl-10 f-12">职称：<c:out value="${teacher.jobtitle}"></c:out><a onclick="layer_show('发送消息给<c:out value="${teacher.name}"></c:out>','message/send?recvId=${teacher.id}',300,300);">发送消息</a>
 	</span></dt>
-    <dd class="pt-10 f-12" style="margin-left:0">${teacher.introduction}</dd>
+    <dd class="pt-10 f-12" style="margin-left:0"><c:out value="${teacher.introduction}"></c:out></dd>
   </dl>
 </div>
 	<div class="pd-20">
@@ -32,7 +32,7 @@
         	<input type="radio" value="${issue.id}" name="cid"/>
         </th>
         <td>
-        	<a onclick="layer_show('导师资料','issue/issue-detail?issue_id=${issue.id}',300,300);">${issue.subject}</a>
+        	<a onclick="layer_show('导师资料','issue/issue-detail?issue_id=${issue.id}',300,300);"><c:out value="${issue.subject}"></c:out></a>
         </td>
       </tr>
       </c:forEach>
@@ -55,8 +55,8 @@ $(function(){
 				$.ajax({ 
 					type: "POST", 
 					url: "issue/choise?issue_id=" + cid, 
-					success: function(msg) { 
-						layer.msg(msg,{icon: 6,time:1000});
+					success: function(data) { 
+						layer.msg(data['msg'],{icon: 6,time:1000});
 						clock();
 					} ,
 					error : function(e) {

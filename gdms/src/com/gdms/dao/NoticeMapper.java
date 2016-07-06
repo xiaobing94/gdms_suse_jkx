@@ -18,6 +18,10 @@ public interface NoticeMapper {
     List<Notice> selectByTeacherId(Integer teacherId);
     
     List<Notice> selectByMajor(String major);
+    
+    List<Notice> selectAll();
+    
+    List<Notice> selectAllByMajor(String major);
 
     int updateByPrimaryKeySelective(Notice record);
 

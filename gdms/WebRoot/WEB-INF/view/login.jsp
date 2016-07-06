@@ -15,9 +15,9 @@
 		<link rel="Bookmark" href="favicon.ico">
 		<link rel="Shortcut Icon" href="favicon.ico" />
 		<!--[if lt IE 9]> 
-		    <script type="text/javascript" src="lib/html5.js"></script>
-		    <script type="text/javascript" src="lib/respond.min.js"></script>
-		    <script type="text/javascript" src="lib/PIE_IE678.js"></script>
+		    <script type="text/javascript" src="res/lib/html5.js"></script>
+		    <script type="text/javascript" src="res/lib/respond.min.js"></script>
+		    <script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
     	<![endif]-->
 		<link href="res/css/H-ui.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="res/font-awesome/font-awesome.min.css"/>
@@ -43,8 +43,8 @@
 					<span class="f-r">
 						<ul class="nav-right">
 							<li>欢迎	访问四川理工学院毕业设计管理系统！</li>
-							<li><a href="common/login.jsp">登录</a></li>
-							<li><a href="common/register.jsp">注册</a></li>
+							<li><a href="">登录</a></li>
+							<li><a href="student_register">注册</a></li>
 						</ul>
 					</span>
 				</div>
@@ -83,7 +83,10 @@
 							</div>
 							<div class="panel-body">
 								<form method="post" class="form form-horizontal responsive" id="login-form" action="">
-									<div class="Huialert Huialert-success"><i class="icon-remove"></i>请输入正确信息</div>
+								   <c:if test="${ msg!=null }">
+									<!--<div class="Huialert Huialert-success"><i class="icon-remove"></i>/div>-->
+									<div class="Huialert Huialert-danger"><i class="icon-remove"></i><c:out value="${msg}"></c:out></div>
+									</c:if>
 									<!--<div class="Huialert Huialert-danger"><i class="icon-remove"></i>危险状态提示</div>-->
 									<div class="row cl">
 										<label class="form-label col-3">账号：</label>
@@ -115,7 +118,7 @@
 									
 									<div class="row cl">
 										<a class="f-l pd-5" href="#">忘记密码？</a>
-										<a class="f-r pd-5" href="/common/register.jsp">立即注册</a>
+										<a class="f-r pd-5" href="student_register">立即注册</a>
 									</div>
 									
 									<div class="row cl text-c">
@@ -138,11 +141,9 @@
 				<div class="footer-top-nav w">
 					<ul>
 						<li><a>关于我们</a></li>
-						<li><a href="#">证书查询</a></li>
 						<li><a href="#">诚聘英才</a></li>
 						<li><a href="#">主营业务</a></li>
 						<li><a href="#">联系方式</a></li>
-						<li><a href="#">友情链接</a></li>
 						<li><a href="#">网站地图</a></li>
 					</ul>
 

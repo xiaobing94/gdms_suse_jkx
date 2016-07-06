@@ -13,12 +13,12 @@
 <div class="cl pd-20">
   <dl style="margin-left:10px">
     <dd class="pt-10 f-13" style="margin-left:0">
-    	${comment.text}
+    	<c:out value="${comment.text}"></c:out>
     </dd>
   </dl>
   <dl style="margin-right:10px">
     <dd class="pt-10 f-13" style="margin-left:0">
-    	${comment.dateline}
+    	<c:out value="${comment.dateline}"></c:out>
     </dd>
   </dl>
 </div>

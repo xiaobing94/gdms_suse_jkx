@@ -17,9 +17,9 @@ public interface UserMapper {
     
     List<User> selectTeacherByMajor(String major);
     
-    List<User> selectChoiseMeStudent(Integer teacher_id, Integer grade);
+    List<User> selectChoiseMeStudent(Integer teacher_id, Integer grade);  //获取我选择的学生列表
     
-    List<User> selectStudentByTeacherId(Integer teacher_id, Integer grade);
+    List<User> selectStudentByTeacherId(Integer teacher_id, Integer grade);  //获取我的学生列表
     
     User selectByWorkIdandPassword(String work_id, String password);
 

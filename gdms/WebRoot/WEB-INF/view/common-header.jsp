@@ -8,9 +8,9 @@
 <link rel="Bookmark" href="favicon.ico" > 
 <link rel="Shortcut Icon" href="favicon.ico" /> 
 <!--[if lt IE 9]>
-<script type="text/javascript" src="../lib/html5.js"></script>
-<script type="text/javascript" src="../lib/respond.min.js"></script>
-<script type="text/javascript" src="../lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="res/lib/html5.js"></script>
+<script type="text/javascript" src="res/lib/respond.min.js"></script>
+<script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
 <![endif]-->
 <link href="res/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />

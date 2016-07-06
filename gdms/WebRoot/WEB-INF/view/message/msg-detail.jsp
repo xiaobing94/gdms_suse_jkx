@@ -18,12 +18,12 @@
             <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://static.h-ui.net/h-ui/images/ucnter/avatar-default.jpg"></i></a>
               <div class="comment-main">
                 <header class="comment-header">
-                  <div class="comment-meta"><a class="comment-author" href="#">${msg.fromer.name}</a> 
-                    <time title="${msg.fromer.name}" datetime="${msg.fromer.name}">${msg.fromer.name}</time>
+                  <div class="comment-meta"><a class="comment-author" href="#"><c:out value="${msg.fromer.name}"></c:out></a> 
+                    <time title="<c:out value="${msg.dateline}"></c:out>" datetime="<c:out value="${msg.dateline}"></c:out>"><c:out value="${msg.dateline}"></c:out></time>
                   </div>
                 </header>
                 <div class="comment-body">
-                  <p><a href="#">@${msg.recver.name}</a> ${msg.note}</p>
+                  <p><a href="#">@<c:out value="${msg.recver.name}"></c:out></a> <c:out value="${msg.note}"></c:out></p>
                 </div>
               </div>
             </li>
@@ -32,12 +32,12 @@
             <li class="item cl comment-flip"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://static.h-ui.net/h-ui/images/ucnter/avatar-default.jpg"></i></a>
               <div class="comment-main">
                 <header class="comment-header">
-                  <div class="comment-meta"><a class="comment-author" href="#">${msg.fromer.name}</a> 
-                    <time title="${msg.fromer.name}" datetime="${msg.fromer.name}">${msg.fromer.name}</time>
+                  <div class="comment-meta"><a class="comment-author" href="#"><c:out value="${msg.fromer.name}"></c:out></a> 
+                    <time title="<c:out value="${msg.dateline}"></c:out>" datetime="<c:out value="${msg.dateline}"></c:out>"><c:out value="${msg.dateline}"></c:out></time>
                   </div>
                 </header>
                 <div class="comment-body">
-                  <p><a href="#">@${msg.recver.name}</a> ${msg.note}</p>
+                  <p><a href="#">@<c:out value="${msg.recver.name}"></c:out></a> <c:out value="${msg.note}"></c:out></p>
                 </div>
               </div>
             </li>

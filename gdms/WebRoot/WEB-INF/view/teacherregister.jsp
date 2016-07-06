@@ -71,13 +71,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="row cl w">
 
 			<div class="docs-tip">
-				<form action="registerAction" method="post" class="form form-horizontal responsive" id="regist-form">
+				<form action="teacher_register" method="post" class="form form-horizontal responsive" id="regist-form">
 					<legend><a href="student_register">学生注册</a> 教师注册</legend>
-					${ msg }
+		            <c:out value="${msg}"></c:out>
 					<div class="row cl">
-						<label class="form-label col-3">学号：</label>
+						<label class="form-label col-3">工号：</label>
 						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="学号" name="user.id" id="username" datatype="n" nullmsg="学号不能为空！">
+							<input type="text" class="input-text" autocomplete="off" placeholder="学号" name="workId" id="username" datatype="n" nullmsg="工号不能为空！">
 						</div>
 						<div class="col-4">
 
@@ -86,36 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row cl">
 						<label class="form-label col-3">教务系统密码：</label>
 						<div class="formControls col-5">
-							<input type="password" class="input-text" autocomplete="off" placeholder="密码" name="jwglpassword" id="password" datatype="*" nullmsg="请输入密码！">
-						</div>
-						<div class="col-4">
-
-						</div>
-					</div>
-					
-					
-					<div class="row cl">
-						<label class="form-label col-3">用户名：</label>
-						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="user.name" id="username" datatype="*4-16" nullmsg="用户名不能为空！">
-						</div>
-						<div class="col-4">
-
-						</div>
-					</div>
-					<div class="row cl">
-						<label class="form-label col-3">密码：</label>
-						<div class="formControls col-5">
-							<input type="password" class="input-text" autocomplete="off" placeholder="密码" name="user.passwd" id="password" datatype="*6-18" nullmsg="请输入密码！">
-						</div>
-						<div class="col-4">
-
-						</div>
-					</div>
-					<div class="row cl">
-						<label class="form-label col-3">密码验证：</label>
-						<div class="formControls col-5">
-							<input type="password" class="input-text" autocomplete="off" placeholder="再输入一次密码" name="user.rePasswd" id="password2" recheck="user.passwd" datatype="*6-18" nullmsg="请再输入一次密码！" errormsg="您两次输入的密码不一致！">
+							<input type="password" class="input-text" autocomplete="off" placeholder="密码" name="password" id="password" datatype="*" nullmsg="请输入密码！">
 						</div>
 						<div class="col-4">
 
@@ -125,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class="form-label col-3">专业：</label>
 						<div class="formControls col-5"> 
 						<span class="select-box">
-			              <select class="select" autocomplete="off" size="1" name="user.major" datatype="*" nullmsg="请选择专业！">
+			              <select class="select" autocomplete="off" size="1" name="major" datatype="*" nullmsg="请选择专业！">
 			                <option value="" selected>请选择专业</option>
 			                <option value="软件工程">软件工程</option>
 			                <option value="网络工程">网络工程</option>
@@ -137,19 +108,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div> 
                         </div>
                        
-                        <div class="row cl">
-						<label class="form-label col-3">真实姓名：</label>
-						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="teacher.name" id="username" datatype="*4-16" nullmsg="真实姓名不能为空！">
-						</div>
-						<div class="col-4">
-
-						</div>
-						</div>
                          <div class="row cl">
 						<label class="form-label col-3">介绍：</label>
 						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="teacher.introduction" id="username" datatype="*2-16" nullmsg="真实姓名不能为空！">
+							<input type="text" class="input-text" autocomplete="off" placeholder="10-255个字符，字母/中文/数字/下划线" name="introduction" id="username" datatype="*10-255" nullmsg="不能为空！">
 						</div>
 						<div class="col-4">
 
@@ -158,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row cl">
 						<label class="form-label col-3">可带学生数量：</label>
 						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="teacher.amount" id="username" datatype="*2-16" nullmsg="真实姓名不能为空！">
+							<input type="text" class="input-text" autocomplete="off" placeholder="数字" name="amount" id="username" datatype="*1-2" nullmsg="不能为空！">
 						</div>
 						<div class="col-4">
 
@@ -168,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <label class="form-label col-3">职位：</label>
 						<div class="formControls col-5"> 
 						<span class="select-box">
-			              <select class="select" autocomplete="off" size="1" name="user.type" datatype="*" nullmsg="请选择！">
+			              <select class="select" autocomplete="off" size="1" name="type" datatype="*" nullmsg="请选择！">
 			                <option value="" selected>请选择专业</option>
 			                <option value="1">导师</option>
 			                <option value="2">系主任</option>
@@ -185,7 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row cl">
 						<label class="form-label col-3"><img alt="vertifyCode" src="validatecode"></label>
 						<div class="formControls col-5">
-							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="user.validateCode" id="username" datatype="*4-16" nullmsg="验证码为空！">
+							<input type="text" class="input-text" autocomplete="off" placeholder="4~16个字符，字母/中文/数字/下划线" name="validateCode" id="username" datatype="*2-6" nullmsg="验证码为空！">
 						</div>
 						<div class="col-4">
 

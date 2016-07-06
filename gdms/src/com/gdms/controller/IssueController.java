@@ -111,10 +111,35 @@ public class IssueController extends BaseController{
 		model.addAttribute("teacher", teacher);
 		return "teacher/teacher-info";
 	}
+	@RequestMapping("/issueList")
+	public String getIssueList(HttpSession session, Model model){
+		User user = (User) session.getAttribute("user");
+		List<Issue> issueList = issueService.getIssueListByTeacher(user.getId());
+		model.addAttribute("issueList", issueList);
+		return "issue/issue-list-for-del";
+	}
+	@RequestMapping("/del")
+	public String delIssueList(int[] issue_id, HttpSession session, Model model){
+		issueService.deleteIssueByArr(issue_id);
+		model.addAttribute("msg", "删除成功");
+		return "notice-msg";
+	}
 	@RequestMapping("/issue-detail")
 	public String issueDetail(int issue_id, HttpSession session, Model model){
 		Issue issue = issueService.getContent(issue_id);
 		model.addAttribute("issue", issue);
 		return "teacher/topic-info";
 	}
+//	@RequestMapping("/getMyIssue")
+//	public String getMyIssue(HttpSession session, Model model){
+//		User user = (User) session.getAttribute("user");
+//		if(!user.isStudent()){
+//			model.addAttribute("msg", "你没有权限");
+//			return "notice-msg";
+//		}
+//		issueService.getStudentIssue(user);
+//		//Issue issue = issueService.getContent(issue_id);
+//		//model.addAttribute("issue", issue);
+//		return "teacher/topic-info";
+//	}
 }

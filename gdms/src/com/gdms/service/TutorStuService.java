@@ -51,26 +51,43 @@ public class TutorStuService {
 		this.tutorStuDAO = tutorStuDAO;
 	}
 
-	public boolean create(int studentId, int teathcerId) {
-		User teacher = userDAO.selectByPrimaryKey(teathcerId);
+	public boolean create(int studentId, int teatherId) {
+		User teacher = userDAO.selectByPrimaryKey(teatherId);
 		User student = userDAO.selectByPrimaryKey(studentId);
 		int grade = PropertiesLog4j.getGrade();
 		if (teacher == null || student == null) {
 			return false;
 		} else {
 			if (teacher.getAmount() == null
-					|| tutorStuDAO.selectChoiseCount(teathcerId, grade) >= teacher
+					|| tutorStuDAO.selectChoiseCount(teatherId, grade) >= teacher
 							.getAmount()) {
 				return false;
 			}
-			TutorStu tutorStu = new TutorStu();
-			tutorStu.setStudentId(studentId);
-			tutorStu.setTeathcerId(teathcerId);
-			tutorStuDAO.insertSelective(tutorStu);
+			TutorStu oldTutor = tutorStuDAO.getTeacherByStudentId(studentId);
+			if(oldTutor==null){
+				TutorStu tutorStu = new TutorStu();
+				tutorStu.setStudentId(studentId);
+				tutorStu.setTeathcerId(teatherId);
+				tutorStuDAO.insertSelective(tutorStu);
+			}else{
+				oldTutor.setStudentId(studentId);
+				oldTutor.setTeacherId(teatherId);
+				tutorStuDAO.updateByPrimaryKeySelective(oldTutor);
+			}
+			
 			return true;
 		}
 	}
-
+	
+	public boolean createByArr(int studentId[], int teathcerId) {
+		for (int i=0; i<studentId.length; i++){
+			boolean isSucc = create(studentId[i], teathcerId);
+			if(!isSucc){
+				return false;
+			}
+		}
+		return true;
+	}
 	public List<User> getLastStudentByMajor(String major) {
 		/**
 		 * 获取没有导师选择的学生，剩下的学生
@@ -91,7 +108,14 @@ public class TutorStuService {
 		 * 获取老师，根据学生id
 		 */
 		TutorStu tutorStu = tutorStuDAO.getTeacherByStudentId(studentId);
-		tutorStu.setInstance(userDAO.selectByPrimaryKey(tutorStu.getStudentId()), userDAO.selectByPrimaryKey(tutorStu.getTeacherId()));
+		if(tutorStu==null){
+			return null;
+		}
+		User teacher = null;
+		if(tutorStu.getTeacherId()!=null&&tutorStu.getTeacherId()!=0){
+			teacher = userDAO.selectByPrimaryKey(tutorStu.getTeacherId());
+		}
+		tutorStu.setInstance(userDAO.selectByPrimaryKey(tutorStu.getStudentId()), teacher);
 		return tutorStu.getTeacher();
 	}
 

@@ -14,7 +14,7 @@
 		<div class="row cl">
 	      <label class="form-label col-3"><span class="c-red">*</span>课题名称：</label>
 	      <div class="formControls col-7">
-	        <input type="text" class="input-text" value="" placeholder="" id="topic" name="subject" datatype="*2-30" nullmsg="不能为空">
+	        <input type="text" class="input-text" value="" placeholder="" id="topic" name="subject" datatype="*2-50" nullmsg="不能为空">
 	      </div>
 	      <div class="col-2"> </div>
 	    </div>

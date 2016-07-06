@@ -11,9 +11,9 @@
 <LINK rel="Bookmark" href="/favicon.ico" >
 <LINK rel="Shortcut Icon" href="/favicon.ico" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="res/lib/html5.js"></script>
+<script type="text/javascript" src="res/lib/respond.min.js"></script>
+<script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
 <![endif]-->
 <link href="res/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
@@ -30,12 +30,8 @@
 <header class="Hui-header cl"> <a class="Hui-logo l" title="毕业设计管理系统" href="">毕业设计管理系统</a>
 	<nav class="mainnav cl" id="Hui-nav">
 		<ul>
-			<li class="dropDown dropDown_click"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+			<li class="dropDown dropDown_click">
 				<ul class="dropDown-menu radius box-shadow">
-					<li><a href="javascript:;" onclick="article_add('添加资讯','admin/article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-					<li><a href="javascript:;" onclick="picture_add('添加资讯','admin/picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-					<li><a href="javascript:;" onclick="product_add('添加资讯','admin/product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-					<li><a href="javascript:;" onclick="member_add('添加用户','admin/member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -47,7 +43,7 @@
 				<li><a href="logout">退出</a></li>
 			</ul>
 		</li>
-		<li id="Hui-msg"> <a onclick="layer_show('消息列表','message/list',500,400);" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-msg"> <a onclick="layer_show('消息列表','message/list',500,400);" title="消息"><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
 		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -70,11 +66,12 @@
 				<ul>
 					<li><a href="javascript:;" onclick="member_add('导师信息导入','imporTeachertXls','','300')">导师信息导入</a></li> 
 					<li><a href="javascript:;" onclick="member_add('学生信息导入','imporStudentXls','','300')">学生信息导入</a></li>
-					<li><a href="javascript:;" onclick="member_add('学生信息导入','choise/xlsexport','','300')">导出学生信息</a></li>
+					<li><a href="javascript:;" onclick="member_add('导出学生信息','choise/xlsexport','','300')">导出学生信息</a></li>
 				</ul>
 			</dd>
 		</dl>
 		</c:if>
+		<c:if test="${ user.haveTeacherPermission()||user.isStudent()}">
 		<dl id="menu-shcool">
 			<dt><i class="Hui-iconfont">&#xe616;</i> 阶段管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -82,11 +79,12 @@
 					
 					<li><a onclick="layer_show('添加课题','issue/create',550,320);">添加课题</a></li>
 					<c:if test="${ user.haveTeacherPermission() }">
+					<li><a _href="issue/issueList">删除课题</a></li>
 					<li><a _href="degree/getStudentList" href="javascript:void(0)">学生列表</a></li>
 					</c:if>
 					<c:if test="${ user.isStudent() }">
 					<li><a onclick="layer_show('导师资料','issue/getMyTutor',400,400);">导师资料</a></li>
-					<li><a _href="degree/getmydegreelist" href="javascript:void(0)">我的阶段列表</a></li>
+					<li><a _href="degree/getmydegreelist" href="javascript:void(0)">我的课题阶段列表</a></li>
 					<li><a onclick="layer_show('上传阶段成果','degree/upload_degree',400,400);">上传阶段成果</a></li>
 					</c:if>
 					<!-- <li><a onclick="layer_show('导师资料','leader/setStart',400,400);">设置开始时间</a></li>
@@ -94,6 +92,7 @@
 				</ul>
 			</dd>
 		</dl>
+		</c:if>
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe611;</i> 通知公告<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -101,6 +100,7 @@
 					<li><a _href="notice/notice-list" href="javascript:;">通知公告列表</a></li> 
 					<c:if test="${ !user.isStudent() }">
 					<li><a _href="notice/add-notice" href="javascript:;">添加通知公告</a></li> 
+					<li><a _href="notice/del-notice-list" href="javascript:;">管理通知公告</a></li> 
 					</c:if>
 				</ul>
 			</dd>
@@ -134,7 +134,16 @@
 			</dd>
 		</dl>
 		</c:if>
-		
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 我的资料<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a onclick="layer_show('密码修改','modifypassword',400,400);">修改密码</a></li>
+					<li><a onclick="layer_show('查看我的信息','myinfo',400,400);">查看我的信息</a></li>
+					<li><a onclick="layer_show('修改我的信息','modifyinfo',400,400);">修改我的信息</a></li>
+				</ul>
+			</dd>
+		</dl>
 		<dl id="menu-article">
 			<dt><i class="Hui-iconfont">&#xe616;</i> 站内信<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

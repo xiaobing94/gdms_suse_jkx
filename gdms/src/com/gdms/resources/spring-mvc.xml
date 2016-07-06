@@ -65,8 +65,6 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/choise/teachermajor"/>
-            <mvc:mapping path="/imporTeachertXls"/>
-            <mvc:mapping path="/imporStudentXls"/>
             <bean class="com.gdms.interceptor.DirectorInterceptor">
             <property name="excludedUrls">
                     <list>

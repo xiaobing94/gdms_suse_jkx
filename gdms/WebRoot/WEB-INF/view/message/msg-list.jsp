@@ -15,8 +15,8 @@
           	<ul>
           	<c:forEach items="${ unreadmessageList }" var="msg">
           		<li>
-          			<a href="message/detail?msg_id=${msg.id}">${msg.note}</a>
-          			<span style="float:right">${msg.dateline}</span>
+          			<a href="message/detail?msg_id=${msg.id}"><c:out value="${msg.note}"></c:out></a>
+          			<span style="float:right"><c:out value="${msg.dateline}"></c:out></span>
           		</li>
           	</c:forEach>
           	</ul>
@@ -25,8 +25,8 @@
           		<ul>
           		<c:forEach items="${ readmessageList }" var="msg">
           		<li>
-          			<a href="#">${msg.note}</a>
-          			<span style="float:right">${msg.dateline}</span>
+          			<a href="message/detail?msg_id=${msg.id}"><c:out value="${msg.note}"></c:out></a>
+          			<span style="float:right"><c:out value="${msg.dateline}"></c:out></span>
           		</li>
           		</c:forEach>
           	</ul>

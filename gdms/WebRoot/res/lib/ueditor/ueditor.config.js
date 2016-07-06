@@ -35,20 +35,12 @@
         //jsp/controller.jsp
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'paragraph', 'fontfamily', 'fontsize', '|',
-            '|',
-            'justifyleft', //居左对齐
-            'justifyright', //居右对齐
-            'justifycenter', //居中对齐
-            'justifyjustify',//两端对齐
-            '|',
-            'link','|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'scrawl', 'attachment','background', '|',
-            'horizontal', 'date', 'time','searchreplace',
-            'drafts'
+				'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', 
+				'|', 'forecolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+				'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+				'paragraph', 'fontfamily', 'fontsize',
+				 'indent', '|',
+				'link'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{

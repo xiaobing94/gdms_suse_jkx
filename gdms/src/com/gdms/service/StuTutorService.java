@@ -60,4 +60,20 @@ public class StuTutorService {
 		int grade = PropertiesLog4j.getGrade();
 		return stuTutorDAO.selectChoiseCountByTeacherId(teacher_id, grade);
 	}
+	
+	public User getMyTeacher(User user){
+		/**
+		 * 获取自己的导师
+		 */
+		if(!user.isStudent()){
+			return null;
+		}
+		StuTutor stuTutor = stuTutorDAO.selectByStudentId(user.getId());
+		Integer teacherId = stuTutor.getTeacherId();
+		if(teacherId==null){
+			return null;
+		}else{
+		    return userDAO.selectByPrimaryKey(teacherId);
+		}
+	}
 }

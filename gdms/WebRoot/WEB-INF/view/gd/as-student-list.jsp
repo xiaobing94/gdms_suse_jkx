@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,member-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="../lib/html5.js"></script>
-<script type="text/javascript" src="../lib/respond.min.js"></script>
-<script type="text/javascript" src="../lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="res/lib/html5.js"></script>
+<script type="text/javascript" src="res/lib/respond.min.js"></script>
+<script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
 <![endif]-->
 <link href="res/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
@@ -26,9 +26,8 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span> 毕业设计 <span class="c-gray en">&gt;</span> 学生列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
 	<div class="mt-20">
-	<form action="gd/assignStudent" method="post" id="form-assign-student">
+	<form action="choise/choise-student" method="post" id="form-assign-student">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
@@ -41,17 +40,17 @@
 		<tbody>
 		<c:forEach var="student" items="${studentList}">
 			<tr class="text-c">
-				<td><input type="checkbox" value="1" name="sid"></td>
-				<td>${student.workId}</td>
-				<td>${student.name}</td>
-				<td>${student.introduction}</td>
+				<td><input type="checkbox" value="${student.id}" name="student_id"></td>
+				<td><c:out value="${student.workId}"></c:out></td>
+				<td><c:out value="${student.name}"></c:out></td>
+				<td><c:out value="${student.introduction}"></c:out></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	<div class="row cl">
       <div class="col-12">
-        <input id="submit" class="btn btn-primary radius btn-block" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        <input id="submit" class="btn btn-primary radius btn-block" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
       </div>
     </div>
 	</form>
@@ -80,7 +79,7 @@ $(function(){
 $(function(){
 	$("#submit").click(function(){
 		var checkFlag = false;
-		$("input[name='sid']").each(function(){
+		$("input[name='student_id']").each(function(){
 			if($(this).is(":checked")){
 				checkFlag = true;
 			}
@@ -88,8 +87,25 @@ $(function(){
 		if(!checkFlag){
 			layer.msg('请至少选择一位学生！',{icon: 5,time:1000});
 			return false;
-		}
-		$("form-assign-student").submit();
+		}else{
+		    //$("form-assign-student").submit();
+		    //var list = $("input[name='student_id']");
+		     var student_id = new Array();
+		    $("input[name='student_id']").each(function(){
+		    	student_id.push($(this).val());
+		    })
+		    $.ajax({
+		    	type:"GET",
+		    	contentType:"application/json",
+		    	url:"choise/choise-student?student_id=" + student_id,
+		    	success: function(data){
+		    		layer.msg(data["msg"],{icon: 6,time:1000});
+		    	}
+		    });
+		    //window.close();
+		    
+		    //return true;
+	    }
 		window.close();
 	});
 });

@@ -56,7 +56,10 @@ public class ChoiseController extends BaseController {
 			User teacher = teacherList.get(i);
 			teacher.setTotal(stuTutorService.getAmountByTeacherId(teacher.getId()));
 		}
+		User teacher = stuTutorService.getMyTeacher(user);
 		model.addAttribute("teacherList", teacherList);
+		model.addAttribute("myteacher", teacher);
+		System.out.println("teacher:"+teacher.getName());
 		return "gd/choose-teacher";
 	}
 	@RequestMapping("/choise-teacher")
@@ -96,13 +99,13 @@ public class ChoiseController extends BaseController {
 		}
 	}
 	@RequestMapping("/choise-student")
-	public  String tutorStu(int student_id, HttpSession session, Model model, HttpServletResponse response){
+	public  String tutorStu(int student_id[], HttpSession session, Model model, HttpServletResponse response){
 		User user =  (User) session.getAttribute("user");
 		if(!user.haveTeacherPermission()){
 			return publishmsg("你没有这个权限", response);
 		}
 		else{
-			if(tutorStuService.create(student_id, user.getId())){
+			if(tutorStuService.createByArr(student_id, user.getId())){
 				return publishmsg("成功", response);
 			}
 			else{

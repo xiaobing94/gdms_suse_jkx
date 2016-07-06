@@ -41,6 +41,7 @@ public class BaseController {
 	 * @return
 	 */
 	public String publishmsg(String msg, HttpServletResponse response) {
+		//response.setContentType("application/json; charset=utf-8");
 		outJson("{\"msg\":\"" + msg + "\"}", response);
 		return null;
 	}

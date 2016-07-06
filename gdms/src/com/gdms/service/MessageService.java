@@ -57,7 +57,10 @@ public class MessageService {
 		/**
 		 * »ñÈ¡ÄÚÈÝ
 		 */
-		return messageDAO.selectByPrimaryKey(msgId);
+		Message msg = messageDAO.selectByPrimaryKey(msgId);
+		msg.setStatus(Message.READ);
+		messageDAO.updateByPrimaryKeySelective(msg);
+		return msg;
 	}
 	public List<Message> getMessageListById(int msgId)
 	{

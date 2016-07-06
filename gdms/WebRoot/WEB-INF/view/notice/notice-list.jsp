@@ -18,7 +18,7 @@
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 <link href="res/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
 <!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script type="text/javascript" src="res/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title>通知公告</title>
@@ -32,13 +32,13 @@
 		<div class="row cl">
 				    	<ul>
 				    	<c:forEach var="notice" items="${teacherNoticeList}">
-					    	<li><a href="notice/detail?notice_id=${notice.id}">[老师公告]${notice.subject}</a><span style="float:right">${notice.dateline}</span></li>
+					    	<li><a href="notice/detail?notice_id=${notice.id}">[老师公告]<c:out value="${notice.subject}"></c:out></a><span style="float:right"><c:out value="${notice.dateline}"></c:out></span></li>
 					    </c:forEach>
 					    <c:forEach var="notice" items="${majorNoticeList}">
-					    	<li><a href="notice/detail?notice_id=${notice.id}">[专业公告]${notice.subject}</a><span style="float:right">${notice.dateline}</span></li>
+					    	<li><a href="notice/detail?notice_id=${notice.id}">[专业公告]<c:out value="${notice.subject}"></c:out></a><span style="float:right"><c:out value="${notice.dateline}"></c:out></span></li>
 					    </c:forEach>
 					    <c:forEach var="notice" items="${collegeNoticeList}">
-					    	<li><a href="notice/detail?notice_id=${notice.id}">[学院公告]${notice.subject}</a><span style="float:right">${notice.dateline}</span></li>
+					    	<li><a href="notice/detail?notice_id=${notice.id}">[学院公告]<c:out value="${notice.subject}"></c:out></a><span style="float:right"><c:out value="${notice.dateline}"></c:out></span></li>
 					    </c:forEach>
 					    </ul>
     	</div>

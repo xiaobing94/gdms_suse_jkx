@@ -12,10 +12,10 @@
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, subject, type, author, dateline
+    notice.id, notice.subject, notice.type, notice.author, notice.dateline
   </sql>
   <sql id="Blob_Column_List" >
-    text
+    notice.text
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -25,13 +25,27 @@
     from notice
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice ORDER BY dateline desc
+  </select>
+  <select id="selectAllByMajor" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice, user where notice.author= user.id and user.major= #{major, jdbcType=VARCHAR}
+  </select>
   <select id="selectCollage" resultMap="ResultMapWithBLOBs" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from notice
-    where type = 3 
+    where type = 3 ORDER BY dateline desc
   </select>
   <select id="selectByTeacherId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -39,13 +53,13 @@
     ,
     <include refid="Blob_Column_List" />
     from notice
-    where type = 1 and author = #{teacherId, jdbcType=INTEGER}
+    where type = 1 and author = #{teacherId, jdbcType=INTEGER} ORDER BY dateline desc
   </select>
   <select id="selectByMajor" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     notice.id, subject, notice.type, author, dateline, text
     from notice, user
-    where notice.type = 2 and user.id = notice.author and major = #{major, jdbcType=VARCHAR}
+    where notice.type = 2 and user.id = notice.author and major = #{major, jdbcType=VARCHAR} ORDER BY dateline desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from notice

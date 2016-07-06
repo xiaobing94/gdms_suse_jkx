@@ -33,20 +33,20 @@
 ${msg}
 	<div class="pd-20">
 		<!--  -->
-		<form action="notice/create" method="post"
+		<form action="notice/add-notice" method="post"
 			class="form form-horizontal" id="form-article-add">
 			<div class="row cl">
 				<label class="form-label col-2"><span class="c-red">*</span>标题：</label>
 				<div class="formControls col-8">
 					<input type="text" class="input-text" value="" placeholder="" id=""
-						nullmsg="标题不能为空" name="subject">
+						nullmsg="标题不能为空" name="subject" size="45">
 				</div>
 				<div class="col-2"></div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-2"><span class="c-red">*</span>类型：</label>
 				<div class="formControls col-2">
-					<span class="select-box"> <select name="type" class="select">
+					<span class="select-box"> <select name="type" nullmsg="类型不能为空" class="select">
 							<option value="" selected="">请选择类型</option>
 							<c:if test="${user.haveTeacherPermission()}">
 								<option value="1">导师公告</option>
@@ -73,15 +73,9 @@ ${msg}
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
 					<button onClick="article_save_submit();"
-						class="btn btn-primary radius" type="submit">
+						class="btn btn-primary radius">
 						<i class="Hui-iconfont">&#xe632;</i> 保存并提交审核
 					</button>
-					<button onClick="article_save();" class="btn btn-secondary radius"
-						type="button">
-						<i class="Hui-iconfont">&#xe632;</i> 保存草稿
-					</button>
-					<button onClick="layer_close();" class="btn btn-default radius"
-						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 				</div>
 			</div>
 		</form>
@@ -92,10 +86,8 @@ ${msg}
 		src="res/lib/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript"
 		src="res/lib/icheck/jquery.icheck.min.js"></script>
-	<script type="text/javascript"
-		src="res/lib/Validform/5.3.2/Validform.min.js"></script>
-	<script type="text/javascript"
-		src="res/lib/webuploader/0.1.5/webuploader.min.js"></script>
+	<script type="text/javascript" rc="res/lib/Validform/5.3.2/Validform.min.js"></script>
+	<script type="text/javascript" src="res/lib/webuploader/0.1.5/webuploader.min.js"></script>
 	<script type="text/javascript" src="res/lib/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" src="res/lib/ueditor/ueditor.all.min.js">
 		

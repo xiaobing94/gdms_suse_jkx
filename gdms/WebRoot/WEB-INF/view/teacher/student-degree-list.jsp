@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,member-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="../lib/html5.js"></script>
-<script type="text/javascript" src="../lib/respond.min.js"></script>
-<script type="text/javascript" src="../lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="res/lib/html5.js"></script>
+<script type="text/javascript" src="res/lib/respond.min.js"></script>
+<script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
 <![endif]-->
 <link href="res/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,8 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span>我的阶段列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+    <h5>课题:<b><c:out value="${ issue.subject }"></c:out></b></h5>
+    说明：<c:out value="${ issue.introduction }"></c:out>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -41,10 +42,10 @@
 		<tbody>
 		<c:forEach items="${degreeList}" var="degree">
 			<tr class="text-c">
-				<td>${degree.id}</td>
-				<td>${degree.dateline}</td>
-				<td>${degree.explain}</td>
-				<td><a href="${degree.path}">下载</a></td>
+				<td><c:out value="${degree.id}"></c:out></td>
+				<td><c:out value="${degree.dateline}"></c:out></td>
+				<td><c:out value="${degree.explain}"></c:out></td>
+				<td><a href="<c:out value="${degree.path}"></c:out>">下载</a></td>
 				<td><a onclick="layer_show('导师资料','degree/getCommentByDegreeId?degreeId=${degree.id}',400,400);">评语</a></td>
 			</tr>
 		</c:forEach>

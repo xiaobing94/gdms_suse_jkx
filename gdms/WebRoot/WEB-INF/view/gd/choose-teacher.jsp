@@ -18,9 +18,9 @@ String basePath = request.getScheme() + "://"
 	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,member-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="../lib/html5.js"></script>
-<script type="text/javascript" src="../lib/respond.min.js"></script>
-<script type="text/javascript" src="../lib/PIE_IE678.js"></script>
+<script type="text/javascript" src="res/lib/html5.js"></script>
+<script type="text/javascript" src="res/lib/respond.min.js"></script>
+<script type="text/javascript" src="res/lib/PIE_IE678.js"></script>
 <![endif]-->
 <link href="res/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="res/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
@@ -42,10 +42,6 @@ String basePath = request.getScheme() + "://"
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="pd-20">
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="r">共有数据：<strong>88</strong> 条
-			</span>
-		</div>
 		<div class="mt-20">
 			<table
 				class="table table-border table-bordered table-hover table-bg table-sort">
@@ -62,12 +58,20 @@ String basePath = request.getScheme() + "://"
 				<tbody>
 					<c:forEach var="teacher" items="${teacherList}">
 						<tr class="text-c">
-							<td>${teacher.id}</td>
-							<td>${teacher.name}</td>
-							<td>${teacher.introduction}</td>
-							<td>${teacher.total}</td>
-							<td class="td-status"><span
-								class="label label-defaunt radius">未选择</span></td>
+							<td><c:out value="${teacher.id}"></c:out></td>
+							<td><c:out value="${teacher.name}"></c:out></td>
+							<td><c:out value="${teacher.introduction}"></c:out></td>
+							<td><c:out value="${teacher.total}"></c:out></td>
+							<td class="td-status">
+							    <c:choose>
+							    <c:when test="${ teacher.id == myteacher.id }">
+							    <span class="label label-success radius">已选择</span>
+							    </c:when>
+							    <c:otherwise>
+								<span class="label label-defaunt radius">未选择</span>
+								</c:otherwise>
+								</c:choose>
+							</td>
 							<td class="td-manage"><a style="text-decoration:none"
 								onclick="choose_teacher(this,${teacher.id})" href="javascript:;"
 								title="选择导师"><i class="Hui-iconfont"></i></a></td>

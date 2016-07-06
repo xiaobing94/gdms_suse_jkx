@@ -82,4 +82,25 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		return "notice/notice-detail";
 	}
+	@RequestMapping("/del-notice-list")
+	public String delNoticeList(HttpSession session, Model model) {
+		User user = (User)session.getAttribute("user");
+		if(user.haveLeaderPermission()){
+			List<Notice> noticeList = noticeService.getAllNotice();
+			model.addAttribute("noticeList", noticeList);
+		}else if(user.haveLeaderPermission()){
+			List<Notice> noticeList = noticeService.getAllNoticeByMajor(user.getMajor());
+			model.addAttribute("noticeList", noticeList);
+		}else if(user.haveTeacherPermission()){
+			List<Notice> noticeList = noticeService.getNoticeListWithAuthorUserByTeacherId(user.getId());
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "notice/notice-list-for-del";
+	}
+	@RequestMapping("/del")
+	public String delNotice(int notice_id[], Model model) {
+		noticeService.deleteByArr(notice_id);
+		model.addAttribute("msg", "É¾³ý³É¹¦");
+		return "notice-msg";
+	}
 }

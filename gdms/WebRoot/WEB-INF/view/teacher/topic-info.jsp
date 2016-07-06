@@ -12,8 +12,8 @@
 <div class="cl pd-20">
   <dl style="margin-left:10px">
     <dd class="pt-10 f-13" style="margin-left:0">
-    	<h4>${issue.subject}</h4>
-    	${issue.introduction}
+    	<h4><c:out value="${issue.subject}"></c:out></h4>
+    	<c:out value="${issue.introduction}"></c:out>
     	</dd>
   </dl>
 </div>

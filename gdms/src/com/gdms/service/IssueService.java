@@ -46,4 +46,12 @@ public class IssueService {
 	public Issue getStudentIssue(User student){
 		return issueDAO.selectByStudentId(student.getId());
 	}
+	public void deleteById(int id){
+		issueDAO.deleteByPrimaryKey(id);
+	}
+	public void deleteIssueByArr(int[] issue_id){
+		for(int id:issue_id){
+			deleteById(id);
+		}
+	}
 }

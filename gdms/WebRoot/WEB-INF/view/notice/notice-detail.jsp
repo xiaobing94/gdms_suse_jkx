@@ -17,7 +17,7 @@
 	<div class="nav radius">
 		<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i>
-		<a class="maincolor" href="index.html">首页</a>
+		<span>首页</span>
 		<span class="c-999 en">&gt;</span>通知公告
 		</nav>
 	</div>
@@ -25,13 +25,13 @@
 	<div class="col-xs-12 col-sm-12">
 		<div class="row c1 ml-10 pl-20 pr-20 radius">
 			<div class="news-header">
-	 	    ${notice.subject}
+	 	    <c:out value="${notice.subject}"></c:out>
 	 	    <p style="color:#444;font-weight:400;font-size:14px;padding-top:5px;">
-			发布时间:${notice.dateline}
+			发布时间:<c:out value="${notice.dateline}"></c:out>
 			</p>
 			</div>
 			<div class="news-content">
-			${notice.text}
+			<c:out value="${notice.text}" escapeXml="false"></c:out>
 		</div>
 	</div>
 	</div>
